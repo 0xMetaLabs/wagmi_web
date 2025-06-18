@@ -1,5 +1,5 @@
-import 'package:wagmi_flutter_web/src/js/wagmi.js.dart';
-import 'package:wagmi_flutter_web/src/utils/utils_js.dart';
+import 'package:wagmi_web/src/js/wagmi.js.dart';
+import 'package:wagmi_web/src/utils/utils_js.dart';
 
 /// [Documentation API](https://wagmi.sh/core/api/actions/readContracts)
 class ReadContractsParameters {

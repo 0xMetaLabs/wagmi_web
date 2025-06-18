@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wagmi_flutter_web/src/models/abi.dart';
-import 'package:wagmi_flutter_web/src/models/fees_values.dart';
+import 'package:wagmi_web/src/models/abi.dart';
+import 'package:wagmi_web/src/models/fees_values.dart';
 
 part 'write_contract.freezed.dart';
 

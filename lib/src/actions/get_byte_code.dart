@@ -1,7 +1,7 @@
 import 'dart:js_interop';
 
-import 'package:wagmi_flutter_web/src/js/wagmi.js.dart';
-import 'package:wagmi_flutter_web/src/models/block_tag.dart';
+import 'package:wagmi_web/src/js/wagmi.js.dart';
+import 'package:wagmi_web/src/models/block_tag.dart';
 
 /// [Documentation API](https://wagmi.sh/core/api/actions/getBytecode)
 class GetByteCodeParameters {

@@ -1,4 +1,4 @@
-import 'package:wagmi_flutter_web/src/models/connection.dart';
+import 'package:wagmi_web/src/models/connection.dart';
 
 /// [Documentation API](https://wagmi.sh/core/api/actions/watchConnections)
 

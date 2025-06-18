@@ -1,6 +1,6 @@
-import 'package:wagmi_flutter_web/src/models/abi.dart';
-import 'package:wagmi_flutter_web/src/models/error.dart';
-import 'package:wagmi_flutter_web/src/models/log.dart';
+import 'package:wagmi_web/src/models/abi.dart';
+import 'package:wagmi_web/src/models/error.dart';
+import 'package:wagmi_web/src/models/log.dart';
 
 /// [Documentation API](https://wagmi.sh/core/api/actions/watchContractEvent)
 

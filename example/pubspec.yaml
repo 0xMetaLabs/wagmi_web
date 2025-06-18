@@ -39,7 +39,7 @@ dependencies:
   url_launcher: ^6.2.5
   
 
-  wagmi_flutter_web:
+  wagmi_web:
     path: ../
 
   webthree: ^2.7.5

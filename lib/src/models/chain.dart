@@ -1,10 +1,10 @@
-import 'package:wagmi_flutter_web/src/models/chain_block_explorer.dart';
-import 'package:wagmi_flutter_web/src/models/chain_contract.dart';
-import 'package:wagmi_flutter_web/src/models/chain_fees.dart';
-import 'package:wagmi_flutter_web/src/models/chain_formatters.dart';
-import 'package:wagmi_flutter_web/src/models/chain_native_currency.dart';
-import 'package:wagmi_flutter_web/src/models/chain_rpc_urls.dart';
-import 'package:wagmi_flutter_web/src/models/chain_serializers.dart';
+import 'package:wagmi_web/src/models/chain_block_explorer.dart';
+import 'package:wagmi_web/src/models/chain_contract.dart';
+import 'package:wagmi_web/src/models/chain_fees.dart';
+import 'package:wagmi_web/src/models/chain_formatters.dart';
+import 'package:wagmi_web/src/models/chain_native_currency.dart';
+import 'package:wagmi_web/src/models/chain_rpc_urls.dart';
+import 'package:wagmi_web/src/models/chain_serializers.dart';
 
 /// Chains identifiers.
 ///

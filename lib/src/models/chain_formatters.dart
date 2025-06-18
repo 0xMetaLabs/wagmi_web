@@ -1,4 +1,4 @@
-import 'package:wagmi_flutter_web/src/models/chain_formatter.dart';
+import 'package:wagmi_web/src/models/chain_formatter.dart';
 
 class ChainFormatters {
   ChainFormatters({

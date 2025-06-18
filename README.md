@@ -1,88 +1,94 @@
 # Wagmi SDK wrapper for Flutter Web
 
-## Features
+[![Flutter](https://img.shields.io/badge/Flutter-%5E3.22.3-blue.svg)](https://flutter.dev/)
+[![Node](https://img.shields.io/badge/Node-%5E18.0.0-green.svg)](https://nodejs.org/)
+[![WASM Compatible](https://img.shields.io/badge/WASM-Compatible-brightgreen.svg)](https://webassembly.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/your-repo/pulls)
 
-Exposes [Wagmi](https://wagmi.sh/) sdk to your Flutter web project.
+## Overview
 
-Wagmi provides developers with intuitive building blocks to build their Ethereum apps.
+Wagmi Flutter Web exposes the powerful [Wagmi](https://wagmi.sh/) SDK to your Flutter web projects, providing intuitive building blocks for creating Ethereum applications. This plugin also enables **Wallet Connect (Reown AppKit)** integration, allowing seamless blockchain-based wallet connections in your Flutter web apps.
+
+### Key Features
+
+- 🔗 **Wallet Connect Integration** - Connect to 300+ wallets through Reown AppKit (formerly WalletConnect)
+- 🚀 **100% WASM Compatible** - Full support for WebAssembly compilation
+- 🛠️ **Comprehensive Ethereum Tools** - Access to Wagmi's complete suite of Web3 utilities
+- 📱 **Flutter Web Optimized** - Seamlessly integrates with Flutter's web platform
 
 ## Getting started
 
-In `pubspec.yaml` file, add the `wagmi_flutter_web` dependency :
+Add `wagmi_web` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  wagmi_flutter_web:
+  wagmi_web:
 ```
-
 
 ## Usage
 
+### Basic Setup
 
 ```dart
-import 'package:wagmi_flutter_web/wagmi.dart' as wagmi;
+import 'package:wagmi_web/wagmi.dart' as wagmi;
 
-// Load and initialize Wagmi lib.
+// Load and initialize Wagmi lib
 await wagmi.init();
 
-// Initializes Web3Modal
+// Initialize Web3Modal (Reown AppKit)
 wagmi.Web3Modal.init(
-    'f642e3f39ba3e375f8f714f18354faa4',
-    [wagmi.Chain.ethereum.name!, wagmi.Chain.sepolia.name!],
-    true,
-    true,
+    'f642e3f39ba3e375f8f714f18354faa4', // Your project ID
+    [wagmi.Chain.ethereum.name!, wagmi.Chain.sepolia.name!], // Supported chains
+    true, // Include recommended wallets
+    true, // Set as default
     wagmi.Web3ModalMetadata(
         name: 'Web3Modal',
         description: 'Web3Modal Example',
         url: 'https://web3modal.com',
         icons: ['https://avatars.githubusercontent.com/u/37784886'],
     ),
-    false // email
-    [], // social networks
-    true, // showWallets
-    true, // walletFeatures
+    false, // Email wallet
+    [], // Social networks
+    true, // Show wallets
+    true, // Wallet features
 );
 
-// Opens the Wallet connection modal.
+// Open the wallet connection modal
 wagmi.Web3Modal.open();
 ```
 
-### Error management
+### Error Management
 
-Errors from wagmi can be handled using the `WagmiError` object. 
-Wagmi provides an error stack through the `cause` property. 
-The `findError` method with the error type allows checking if a specific error is in the error stack.
+Handle Wagmi errors effectively using the `WagmiError` object:
 
-The different exceptions are available in the `WagmiErrors` enumeration
-
-```dart 
- try {
-      final transactionHash = await wagmi.Core.writeContract(
+```dart
+try {
+    final transactionHash = await wagmi.Core.writeContract(
         parameters,
-      );
-    } on wagmi.WagmiError catch (e, stackTrace) {
-      if (e.findError(wagmi.WagmiErrors.UserRejectedRequestError) != null) {
+    );
+} on wagmi.WagmiError catch (e, stackTrace) {
+    if (e.findError(wagmi.WagmiErrors.UserRejectedRequestError) != null) {
         throw Exception('userRejected'); 
-      }
-      if (e.findError(wagmi.WagmiErrors.InsufficientFundsError) != null) {
-         throw Exception('insufficientFunds'); 
-      }
-      throw Exception('${e.shortMessage}'); 
     }
+    if (e.findError(wagmi.WagmiErrors.InsufficientFundsError) != null) {
+        throw Exception('insufficientFunds'); 
+    }
+    throw Exception('${e.shortMessage}'); 
+}
 ```
+
+The error stack is accessible through the `cause` property, and you can use `findError` to check for specific error types available in the `WagmiErrors` enumeration.
 
 ## Available Actions
 
-***Status***
+### Implementation Status
 
-🔴 Not Implemented Yet.\
-🟠 Work In Progress.\
-✅ Implemented.\
-🛠️ Blocking WASM Support. (Needs rework in future.)\
-📄 TODO to be managed 
+✅ **Implemented** - Ready to use  
+🟠 **Work In Progress** - Coming soon  
+🔴 **Not Implemented Yet** - Planned for future  
+📄 **TODO** - To be managed  
 
-
-For more details, refer to the [API documentation](https://wagmi.sh/core/api/actions).
+For detailed API documentation, visit [Wagmi Actions Documentation](https://wagmi.sh/core/api/actions).
 
 | Action Name                    | Status          |
 | ------------------------------ | --------------- |
@@ -124,7 +130,7 @@ For more details, refer to the [API documentation](https://wagmi.sh/core/api/act
 | `multicall`                    | 🔴               |
 | `prepareTransactionRequest`    | 🔴               |
 | `readContract`                 | ✅ Implemented   |
-| `readContracts`                | ✅ Implemented 🛠️ |
+| `readContracts`                | ✅ Implemented   |
 | `reconnect`                    | ✅ Implemented   |
 | `sendTransaction`              | ✅ Implemented   |
 | `signMessage`                  | ✅ Implemented   |
@@ -148,48 +154,80 @@ For more details, refer to the [API documentation](https://wagmi.sh/core/api/act
 | `watchPublicClient`            | 🔴               |
 | `writeContract`                | ✅ Implemented   |
 
-
-## Development environment
+## Development Environment
 
 ### Prerequisites
 
-You will need the following tools :
+Ensure you have the following tools installed:
 - Flutter >= 3.22.3
-- nodejs >= 18
+- Node.js >= 18
 
-### Compile & run project
+### Building & Running
 
-#### Compile TypeScript code
+#### Compile TypeScript Code
 
-Following commands will build `JS` code to embed in the web browser.
+Build the JavaScript code for web browser embedding:
 
-```sh
+```bash
+# Install dependencies
 npm install
-npm run build // build production lib
-npm run dev // build & watch in dev mode
-``` 
 
-#### Run Flutter project
+# Build production library
+npm run build
 
-Then, you can run Flutter project as usual. 
-
-```sh
-flutter 
+# Build & watch in development mode
+npm run dev
 ```
 
-### Run Typescript tests
+#### Run Flutter Project
 
-```sh
-$ npm test
+After building the TypeScript code, run your Flutter project normally:
+
+```bash
+flutter run -d chrome
 ```
 
-> When using VSCode, to enable debugging, create your terminal using the command `Debug: JavaScript Debug Terminal`.
+### Testing
 
-### Run Dart tests
+#### TypeScript Tests
 
-```sh
-$ dart test -p chrome
-
-# Or with debug
-$ dart test -p chrome --pause-after-load     
+```bash
+npm test
 ```
+
+> **VSCode Tip**: For debugging support, create your terminal using the command `Debug: JavaScript Debug Terminal`
+
+#### Dart Tests
+
+```bash
+# Run tests
+dart test -p chrome
+
+# Run with debugging
+dart test -p chrome --pause-after-load
+```
+
+## Contributing
+
+We welcome all contributions! Whether it's:
+- 🐛 Bug reports
+- 💡 Feature requests
+- 📝 Documentation improvements
+- 🔧 Code contributions
+
+Please feel free to submit a Pull Request. All PRs are welcome!
+
+## License
+
+This project is licensed under the [LICENSE] file in the repository.
+
+## Support
+
+For issues, feature requests, or questions:
+- 📫 Open an issue on GitHub
+- 💬 Join our community discussions
+- 📖 Check out the [Wagmi documentation](https://wagmi.sh/)
+
+---
+
+Made with ❤️ by [0xMetaLabs](https://0xmetalabs.com)

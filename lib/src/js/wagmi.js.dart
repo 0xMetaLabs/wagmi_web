@@ -1,10 +1,8 @@
 import 'dart:js_interop';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js_util' as js_util;
 
 import 'package:collection/collection.dart';
-import 'package:wagmi_flutter_web/src/models/log.dart';
-import 'package:wagmi_flutter_web/wagmi_flutter_web.dart';
+import 'package:wagmi_web/src/models/log.dart';
+import 'package:wagmi_web/wagmi_flutter_web.dart';
 
 part 'actions/call.js.dart';
 part 'actions/deploy_contract.js.dart';

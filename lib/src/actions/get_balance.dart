@@ -1,8 +1,8 @@
 import 'dart:js_interop';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wagmi_flutter_web/src/js/wagmi.js.dart';
-import 'package:wagmi_flutter_web/src/models/block_tag.dart';
+import 'package:wagmi_web/src/js/wagmi.js.dart';
+import 'package:wagmi_web/src/models/block_tag.dart';
 part 'get_balance.freezed.dart';
 
 /// [Documentation API](https://wagmi.sh/core/api/actions/getBalance)

@@ -17,17 +17,16 @@ extension type JSWatchAccountReturnType(JSFunction _) implements JSFunction {}
 extension JSWatchAccountReturnTypeConversion on JSWatchAccountReturnType {
   // ignore: unnecessary_lambdas
   WatchAccountReturnType get toDart => () {
-        callAsFunction();
-      };
+    callAsFunction();
+  };
 }
 
 extension JSWatchAccountParametersConversion on WatchAccountParameters {
   JSWatchAccountParameters get toJSWatchAccount => JSWatchAccountParameters(
-        onChange: js_util
-            .allowInterop((JSAccount currentAccount, JSAccount prevAccount) {
-          final accountDart = currentAccount.toDart;
-          final prevAccountDart = prevAccount.toDart;
-          onChange(accountDart, prevAccountDart);
-        }) as JSFunction,
-      );
+    onChange: ((JSAccount currentAccount, JSAccount prevAccount) {
+      final accountDart = currentAccount.toDart;
+      final prevAccountDart = prevAccount.toDart;
+      onChange(accountDart, prevAccountDart);
+    }).toJS,
+  );
 }

@@ -11,7 +11,7 @@ import 'package:example/actions/switch_account.dart';
 import 'package:example/actions/write_contract.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wagmi_flutter_web/wagmi_flutter_web.dart' as wagmi;
+import 'package:wagmi_web/wagmi_flutter_web.dart' as wagmi;
 import 'package:webthree/crypto.dart';
 import 'package:webthree/webthree.dart';
 
@@ -147,7 +147,14 @@ class _MyAppState extends State<MyApp> {
       length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Web3Modal'),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Web3Modal'),
+              const SizedBox(width: 8),
+              _buildVersionBanner(),
+            ],
+          ),
           bottom: TabBar(
             tabs: tabs,
           ),
@@ -1689,6 +1696,32 @@ class _MyAppState extends State<MyApp> {
           ],
         );
       },
+    );
+  }
+
+  // Create a version banner widget
+  Widget _buildVersionBanner() {
+    const isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: isRunningWithWasm ? Colors.blue.shade100 : Colors.green.shade100,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isRunningWithWasm ? Colors.blue : Colors.green,
+          width: 1,
+        ),
+      ),
+      child: Text(
+        isRunningWithWasm ? 'WASM' : 'JS',
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+          color:
+              isRunningWithWasm ? Colors.blue.shade800 : Colors.green.shade800,
+        ),
+      ),
     );
   }
 }

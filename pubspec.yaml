@@ -1,4 +1,4 @@
-name: wagmi_flutter_web
+name: wagmi_web
 description: "Wagmi JS SDK wrapper for Dart Web"
 version: 1.0.0-rc.13
 homepage: https://github.com/archethic-foundation/wagmi_flutter_web
@@ -17,7 +17,7 @@ dependencies:
     sdk: flutter
 
   # Annotations for the freezed code-generator. This package does nothing without freezed too
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.0.0
 
   # Defines the annotations used by json_serializable to create code for JSON serialization and deserialization.
   json_annotation: ^4.6.0
@@ -29,12 +29,12 @@ dev_dependencies:
   # A build system for Dart code generation and modular compilation.
   build_runner: ^2.4.8
 
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 
   # Code generation for immutable classes that has a simple syntax/API without compromising on the features
-  freezed: ^2.5.2
+  freezed: ^3.0.6
 
   # Automatically generate code for converting to and from JSON by annotating Dart classes.
   json_serializable: ^6.2.0

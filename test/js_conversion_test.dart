@@ -3,7 +3,7 @@ import 'dart:js_interop_unsafe';
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
-import 'package:wagmi_flutter_web/src/utils/utils_js.dart';
+import 'package:wagmi_web/src/utils/utils_js.dart';
 
 @JS('BigInt')
 external JSBigInt createBigInt(String value);

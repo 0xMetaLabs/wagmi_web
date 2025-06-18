@@ -1,5 +1,5 @@
-import 'package:wagmi_flutter_web/src/models/chain.dart';
-import 'package:wagmi_flutter_web/src/models/connector.dart';
+import 'package:wagmi_web/src/models/chain.dart';
+import 'package:wagmi_web/src/models/connector.dart';
 
 class Account {
   Account({

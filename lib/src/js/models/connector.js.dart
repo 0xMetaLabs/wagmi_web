@@ -25,31 +25,170 @@ extension type JSConnector(JSObject _) implements JSObject {
   external JSFunction? switchChain;
 
   Connector get toDart => Connector(
-        icon: icon?.toDart,
-        id: id?.toDart,
-        name: name?.toDart,
-        type: type?.toDart,
-        uid: uid?.toDart,
-        supportsSimulation: supportsSimulation?.toDart,
-        connect: connect?.toDart as dynamic Function({
-          int? chainId,
-          bool? isReconnecting,
-        })?,
-        disconnect: disconnect?.toDart as void Function()?,
-        emitter: emitter?.jsify(),
-        getAccounts: getAccounts?.toDart as dynamic Function()?,
-        getChainId: getChainId?.toDart as int Function()?,
-        getProvider: getProvider?.toDart as Function()?,
-        isAuthorized: isAuthorized?.toDart as bool Function()?,
-        onAccountsChanged:
-            onAccountsChanged?.toDart as Function({List<dynamic> accounts})?,
-        onChainChanged: onChainChanged?.toDart as Function({int? chain})?,
-        onConnect: onConnect?.toDart as Function({dynamic connectionInfo})?,
-        onDisconnect: onDisconnect?.toDart as Function({dynamic error})?,
-        setup: setup?.toDart as Function()?,
-        switchChain: switchChain?.toDart as Function({
-          dynamic addEthereumChainParameter,
-          int? chainId,
-        })?,
-      );
+    icon: icon?.toDart,
+    id: id?.toDart,
+    name: name?.toDart,
+    type: type?.toDart,
+    uid: uid?.toDart,
+    supportsSimulation: supportsSimulation?.toDart,
+    connect: connect != null ? _convertConnectFunction(connect!) : null,
+    disconnect:
+    disconnect != null ? _convertDisconnectFunction(disconnect!) : null,
+    emitter: emitter?.jsify(),
+    getAccounts: getAccounts != null
+        ? _convertGetAccountsFunction(getAccounts!)
+        : null,
+    getChainId:
+    getChainId != null ? _convertGetChainIdFunction(getChainId!) : null,
+    getProvider: getProvider != null
+        ? _convertGetProviderFunction(getProvider!)
+        : null,
+    isAuthorized: isAuthorized != null
+        ? _convertIsAuthorizedFunction(isAuthorized!)
+        : null,
+    onAccountsChanged: onAccountsChanged != null
+        ? _convertOnAccountsChangedFunction(onAccountsChanged!)
+        : null,
+    onChainChanged: onChainChanged != null
+        ? _convertOnChainChangedFunction(onChainChanged!)
+        : null,
+    onConnect:
+    onConnect != null ? _convertOnConnectFunction(onConnect!) : null,
+    onDisconnect: onDisconnect != null
+        ? _convertOnDisconnectFunction(onDisconnect!)
+        : null,
+    setup: setup != null ? _convertSetupFunction(setup!) : null,
+    switchChain: switchChain != null
+        ? _convertSwitchChainFunction(switchChain!)
+        : null,
+  );
+}
+
+// WASM-safe function converters
+dynamic Function({int? chainId, bool? isReconnecting}) _convertConnectFunction(
+    JSFunction jsFunc) {
+  return ({int? chainId, bool? isReconnecting}) {
+    final args = <JSAny?>[];
+    if (chainId != null || isReconnecting != null) {
+      final params = <String, dynamic>{};
+      if (chainId != null) params['chainId'] = chainId;
+      if (isReconnecting != null) params['isReconnecting'] = isReconnecting;
+      args.add(params.toJSObject);
+    }
+
+    return switch (args.length) {
+      0 => jsFunc.callAsFunction(),
+      1 => jsFunc.callAsFunction(null, args[0]),
+      _ => jsFunc.callAsFunction(),
+    };
+  };
+}
+
+void Function() _convertDisconnectFunction(JSFunction jsFunc) {
+  return () => jsFunc.callAsFunction();
+}
+
+dynamic Function() _convertGetAccountsFunction(JSFunction jsFunc) {
+  return () => jsFunc.callAsFunction();
+}
+
+int Function() _convertGetChainIdFunction(JSFunction jsFunc) {
+  return () {
+    final result = jsFunc.callAsFunction();
+    if (result is JSNumber) return result.toDartInt;
+    return 0;
+  };
+}
+
+Function() _convertGetProviderFunction(JSFunction jsFunc) {
+  return () => jsFunc.callAsFunction();
+}
+
+bool Function() _convertIsAuthorizedFunction(JSFunction jsFunc) {
+  return () {
+    final result = jsFunc.callAsFunction();
+    if (result is JSBoolean) return result.toDart;
+    return false;
+  };
+}
+
+Function({List<dynamic> accounts}) _convertOnAccountsChangedFunction(
+    JSFunction jsFunc) {
+  return ({List<dynamic>? accounts}) {
+    final jsAccounts = (accounts ?? []).toJSArray;
+    return jsFunc.callAsFunction(null, jsAccounts);
+  };
+}
+
+Function({int? chain}) _convertOnChainChangedFunction(JSFunction jsFunc) {
+  return ({int? chain}) {
+    final args = <JSAny?>[];
+    if (chain != null) {
+      final params = <String, dynamic>{'chain': chain};
+      args.add(params.toJSObject);
+    }
+
+    return switch (args.length) {
+      0 => jsFunc.callAsFunction(),
+      1 => jsFunc.callAsFunction(null, args[0]),
+      _ => jsFunc.callAsFunction(),
+    };
+  };
+}
+
+Function({dynamic connectionInfo}) _convertOnConnectFunction(
+    JSFunction jsFunc) {
+  return ({dynamic connectionInfo}) {
+    final args = <JSAny?>[];
+    if (connectionInfo != null) {
+      final params = <String, dynamic>{'connectionInfo': connectionInfo};
+      args.add(params.toJSObject);
+    }
+
+    return switch (args.length) {
+      0 => jsFunc.callAsFunction(),
+      1 => jsFunc.callAsFunction(null, args[0]),
+      _ => jsFunc.callAsFunction(),
+    };
+  };
+}
+
+Function({dynamic error}) _convertOnDisconnectFunction(JSFunction jsFunc) {
+  return ({dynamic error}) {
+    final args = <JSAny?>[];
+    if (error != null) {
+      final params = <String, dynamic>{'error': error};
+      args.add(params.toJSObject);
+    }
+
+    return switch (args.length) {
+      0 => jsFunc.callAsFunction(),
+      1 => jsFunc.callAsFunction(null, args[0]),
+      _ => jsFunc.callAsFunction(),
+    };
+  };
+}
+
+Function() _convertSetupFunction(JSFunction jsFunc) {
+  return () => jsFunc.callAsFunction();
+}
+
+dynamic Function({dynamic addEthereumChainParameter, int? chainId})
+_convertSwitchChainFunction(JSFunction jsFunc) {
+  return ({dynamic addEthereumChainParameter, int? chainId}) {
+    final args = <JSAny?>[];
+    if (addEthereumChainParameter != null || chainId != null) {
+      final params = <String, dynamic>{};
+      if (addEthereumChainParameter != null)
+        params['addEthereumChainParameter'] = addEthereumChainParameter;
+      if (chainId != null) params['chainId'] = chainId;
+      args.add(params.toJSObject);
+    }
+
+    return switch (args.length) {
+      0 => jsFunc.callAsFunction(),
+      1 => jsFunc.callAsFunction(null, args[0]),
+      _ => jsFunc.callAsFunction(),
+    };
+  };
 }

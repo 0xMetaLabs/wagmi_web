@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wagmi_flutter_web/src/models/connector.dart';
+import 'package:wagmi_web/src/models/connector.dart';
 
 part 'connection.freezed.dart';
 
