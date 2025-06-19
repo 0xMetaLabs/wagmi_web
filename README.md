@@ -9,12 +9,16 @@
 
 Wagmi Web exposes the powerful [Wagmi](https://wagmi.sh/) SDK to your Flutter web projects, providing intuitive building blocks for creating Ethereum applications. This plugin enables **Wallet Connect (Reown AppKit)** integration, allowing seamless blockchain-based wallet connections in your Flutter web apps.
 
+![Wagmi Web Demo](https://raw.githubusercontent.com/0xMetaLabs/wagmi_web/main/screenshots/wagmi_web_1.gif)
+
 ### Key Features
 
 - 🔗 **Wallet Connect Integration** - Connect to 300+ wallets through Reown AppKit (formerly WalletConnect) or injected web3 exposed by Wagmi.
 - 🚀 **100% WASM Compatible** - Full support for WebAssembly compilation
 - 🛠️ **Comprehensive Ethereum Tools** - Access to Wagmi's complete suite of Web3 utilities
 - 📱 **Flutter Web Optimized** - Seamlessly integrates with Flutter's web platform
+
+![Modal Interface](https://raw.githubusercontent.com/0xMetaLabs/wagmi_web/main/screenshots/modal.png)
 
 ## Getting started
 
@@ -163,6 +167,8 @@ Ensure you have the following tools installed:
 - Node.js >= 18
 
 ### Building & Running
+
+![JS/WASM Support](https://raw.githubusercontent.com/0xMetaLabs/wagmi_web/main/screenshots/jswasm.png)
 
 #### Compile TypeScript Code
 
