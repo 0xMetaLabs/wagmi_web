@@ -220,7 +220,7 @@ Please feel free to submit a Pull Request. All PRs are welcome!
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GNU Affero General Public License.
 
 ## Support
 

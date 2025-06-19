@@ -2,7 +2,7 @@ import 'dart:js_interop';
 
 import 'package:collection/collection.dart';
 import 'package:wagmi_web/src/models/log.dart';
-import 'package:wagmi_web/wagmi_flutter_web.dart';
+import 'package:wagmi_web/wagmi_web.dart';
 
 part 'actions/call.js.dart';
 part 'actions/deploy_contract.js.dart';

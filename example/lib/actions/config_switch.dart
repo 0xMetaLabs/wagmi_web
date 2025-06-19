@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wagmi_web/wagmi_flutter_web.dart' as wagmi;
+import 'package:wagmi_web/wagmi_web.dart' as wagmi;
 
 class ConfigSwitchExample extends StatelessWidget {
   const ConfigSwitchExample({

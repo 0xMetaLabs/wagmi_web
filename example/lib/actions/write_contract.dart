@@ -5,8 +5,8 @@ import 'package:example/actions/components/snackbar.dart';
 import 'package:example/actions/components/spacer.dart';
 import 'package:example/actions/components/tab_header.dart';
 import 'package:flutter/material.dart';
-import 'package:wagmi_web/wagmi_flutter_web.dart' as wagmi;
-import 'package:wagmi_web/wagmi_flutter_web.dart';
+import 'package:wagmi_web/wagmi_web.dart' as wagmi;
+import 'package:wagmi_web/wagmi_web.dart';
 
 class WriteContractExample extends StatefulWidget {
   const WriteContractExample({super.key});

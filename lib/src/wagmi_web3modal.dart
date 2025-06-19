@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:js_interop';
 
 import 'package:wagmi_web/src/js/wagmi.js.dart';
-import 'package:wagmi_web/wagmi_flutter_web.dart';
+import 'package:wagmi_web/wagmi_web.dart';
 
 class Web3Modal {
   static void init({

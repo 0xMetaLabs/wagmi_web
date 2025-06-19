@@ -11,7 +11,7 @@ import 'package:example/actions/switch_account.dart';
 import 'package:example/actions/write_contract.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wagmi_web/wagmi_flutter_web.dart' as wagmi;
+import 'package:wagmi_web/wagmi_web.dart' as wagmi;
 import 'package:webthree/crypto.dart';
 import 'package:webthree/webthree.dart';
 
@@ -1710,7 +1710,6 @@ class _MyAppState extends State<MyApp> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isRunningWithWasm ? Colors.blue : Colors.green,
-          width: 1,
         ),
       ),
       child: Text(
