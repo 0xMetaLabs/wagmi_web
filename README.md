@@ -20,6 +20,12 @@ Wagmi Web exposes the powerful [Wagmi](https://wagmi.sh/) SDK to your Flutter we
 
 ![Modal Interface](https://raw.githubusercontent.com/0xMetaLabs/wagmi_web/main/screenshots/modal.png)
 
+### Live Examples
+
+Try out Wagmi Web in action:
+- **JavaScript Version**: [https://wagmiweb.web.app](https://wagmiweb.web.app)
+- **WASM Version**: [https://wagmiweb-wasm.web.app](https://wagmiweb-wasm.web.app)
+
 ## Getting started
 
 Add `wagmi_web` to your `pubspec.yaml`:

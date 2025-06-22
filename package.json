@@ -24,20 +24,20 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "jest": "^29.7.0",
-    "terser-webpack-plugin": "^5.3.10",
-    "ts-jest": "^29.2.5",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.5.4",
-    "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.2",
+    "terser-webpack-plugin": "^5.3.14",
+    "ts-jest": "^29.4.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@wagmi/connectors": "^5.1.7",
-    "@wagmi/core": "^2.13.4",
-    "@web3modal/wagmi": "5.1.7",
-    "viem": "^2.20.0"
+    "@wagmi/connectors": "^5.8.5",
+    "@wagmi/core": "^2.17.3",
+    "@web3modal/wagmi": "5.1.11",
+    "viem": "^2.31.4"
   }
 }
