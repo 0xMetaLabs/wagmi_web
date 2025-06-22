@@ -4,14 +4,14 @@ import 'dart:js_interop';
 import 'package:wagmi_web/src/js/wagmi.js.dart';
 import 'package:wagmi_web/wagmi_web.dart';
 
-class Web3Modal {
+class AppKit {
   static void init({
     required String projectId,
     required List<int> chains,
     CoreStorage storage = CoreStorage.localStorage,
     required bool enableAnalytics,
     required bool enableOnRamp,
-    required Web3ModalMetadata metadata,
+    required AppKitMetadata metadata,
     required bool email,
     List<String>? socials,
     required bool showWallets,
@@ -21,7 +21,7 @@ class Web3Modal {
     List<String>? featuredWalletIds,
     List<String>? excludeWalletIds,
   }) {
-    window.web3modal.init(
+    window.appkit.init(
       projectId.toJS,
       chains
           .map(
@@ -50,7 +50,7 @@ class Web3Modal {
     required String configKey,
     required List<int> chains,
     CoreStorage storage = CoreStorage.localStorage,
-    required Web3ModalMetadata metadata,
+    required AppKitMetadata metadata,
     required bool email,
     List<String>? socials,
     required bool showWallets,
@@ -60,7 +60,7 @@ class Web3Modal {
     List<String>? featuredWalletIds,
     List<String>? excludeWalletIds,
   }) =>
-      window.web3modal.createConfig(
+      window.appkit.createConfig(
         projectId.toJS,
         configKey.toJS,
         chains
@@ -81,23 +81,23 @@ class Web3Modal {
         excludeWalletIds?.jsify() as JSArray<JSString>?,
       );
 
-  /// Opens the [Web3Modal]
+  /// Opens the [AppKit]
   static Future<void> open() async {
-    await window.web3modal.open().toDart;
+    await window.appkit.open().toDart;
   }
 
-  /// Closes the [Web3Modal]
+  /// Closes the [AppKit]
   static Future<void> close() async {
-    await window.web3modal.close().toDart;
+    await window.appkit.close().toDart;
   }
 
-  /// Listens to the [Web3Modal] state.
-  static Stream<Web3ModalState> get state {
-    late StreamController<Web3ModalState> controller;
+  /// Listens to the [AppKit] state.
+  static Stream<AppKitState> get state {
+    late StreamController<AppKitState> controller;
     late Function? stopListeningFunction;
 
     void startListening() {
-      stopListeningFunction = window.web3modal
+      stopListeningFunction = window.appkit
           .subscribeState(
             ((PublicStateControllerState state) {
               controller.add(state.toDart);
@@ -111,7 +111,7 @@ class Web3Modal {
       stopListeningFunction = null;
     }
 
-    controller = StreamController<Web3ModalState>(
+    controller = StreamController<AppKitState>(
       onListen: startListening,
       onPause: stopListening,
       onResume: startListening,
@@ -122,9 +122,9 @@ class Web3Modal {
   }
 }
 
-/// [Web3Modal documentation](https://docs.walletconnect.com/appkit/javascript/core/installation#implementation)
-class Web3ModalMetadata {
-  Web3ModalMetadata({
+/// [AppKit documentation](https://docs.walletconnect.com/appkit/javascript/core/installation#implementation)
+class AppKitMetadata {
+  AppKitMetadata({
     required this.name,
     required this.description,
     required this.url,
@@ -136,7 +136,7 @@ class Web3ModalMetadata {
   final String url;
   final List<String> icons;
 
-  JSWagmiWeb3ModalMetadata _toJS() => JSWagmiWeb3ModalMetadata(
+  JSWagmiAppKitMetadata _toJS() => JSWagmiAppKitMetadata(
         name: name.toJS,
         description: description.toJS,
         url: url.toJS,
@@ -144,8 +144,8 @@ class Web3ModalMetadata {
       );
 }
 
-class Web3ModalState {
-  Web3ModalState({
+class AppKitState {
+  AppKitState({
     required this.loading,
     required this.open,
     required this.selectedNetworkId,

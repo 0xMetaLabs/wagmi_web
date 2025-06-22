@@ -37,7 +37,8 @@
   "dependencies": {
     "@wagmi/connectors": "^5.8.5",
     "@wagmi/core": "^2.17.3",
-    "@web3modal/wagmi": "5.1.11",
+    "@reown/appkit": "^1.7.10",
+    "@reown/appkit-adapter-wagmi": "^1.7.10",
     "viem": "^2.31.4"
   }
 }

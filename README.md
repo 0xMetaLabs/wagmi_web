@@ -45,16 +45,16 @@ import 'package:wagmi_web/wagmi.dart' as wagmi;
 // Load and initialize Wagmi lib
 await wagmi.init();
 
-// Initialize Web3Modal (Reown AppKit)
-wagmi.Web3Modal.init(
+// Initialize AppKit (Reown AppKit)
+wagmi.AppKit.init(
     'f642e3f39ba3e375f8f714f18354faa4', // Your project ID
     [wagmi.Chain.ethereum.name!, wagmi.Chain.sepolia.name!], // Supported chains
     true, // Include recommended wallets
     true, // Set as default
-    wagmi.Web3ModalMetadata(
-        name: 'Web3Modal',
-        description: 'Web3Modal Example',
-        url: 'https://web3modal.com',
+    wagmi.AppKitMetadata(
+        name: 'Reown AppKit',
+        description: 'Reown AppKit Example',
+        url: 'https://reown.com',
         icons: ['https://avatars.githubusercontent.com/u/37784886'],
     ),
     false, // Email wallet
@@ -64,7 +64,7 @@ wagmi.Web3Modal.init(
 );
 
 // Open the wallet connection modal
-wagmi.Web3Modal.open();
+wagmi.AppKit.open();
 ```
 
 ### Error Management

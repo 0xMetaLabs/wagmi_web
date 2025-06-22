@@ -23,7 +23,7 @@ class _SwitchAccountExampleState extends State<SwitchAccountExample> {
             methodName: 'switchAccount',
           ),
           const ElevatedButton(
-            onPressed: wagmi.Web3Modal.open,
+            onPressed: wagmi.AppKit.open,
             child: Text('Connect Wallet'),
           ),
           const SizedBox(

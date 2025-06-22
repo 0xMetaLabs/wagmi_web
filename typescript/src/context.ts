@@ -19,7 +19,7 @@ export class JSWagmiContext {
 
     public get config() {
         if (this.#config === undefined) {
-            throw new Error('Wagmi not initialized. Call `Web3Modal.init` first.')
+            throw new Error('Wagmi not initialized. Call `AppKit.init` first.')
         }
         return this.#config
     }
