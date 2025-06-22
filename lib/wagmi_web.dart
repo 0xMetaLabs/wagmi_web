@@ -41,7 +41,6 @@ export 'src/actions/watch_contract_event.dart';
 export 'src/actions/write_contract.dart';
 export 'src/models/abi.dart';
 export 'src/models/account.dart';
-export 'src/models/appkit.dart';
 export 'src/models/asset.dart';
 export 'src/models/block_tag.dart';
 export 'src/models/bytes.dart';
@@ -65,7 +64,7 @@ export 'src/models/transport.dart';
 export 'src/utils/ether_amount.dart';
 export 'src/utils/utils_js.dart';
 export 'src/wagmi_core.dart';
-export 'src/wagmi_web3modal.dart';
+export 'src/wagmi_appkit.dart';
 
 var _isReady = false;
 

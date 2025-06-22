@@ -1,14 +1,14 @@
 part of 'wagmi.js.dart';
 
 @JS()
-extension type JSWagmiWeb3Modal(JSObject _) implements JSObject {
+extension type JSWagmiAppKit(JSObject _) implements JSObject {
   external void init(
     JSString projectId,
     JSArray<JSNumber> chains,
     JSWagmiCoreStorage storage,
     JSBoolean enableAnalytics,
     JSBoolean enableOnRamp,
-    JSWagmiWeb3ModalMetadata metadata,
+    JSWagmiAppKitMetadata metadata,
     JSBoolean email,
     JSArray<JSString>? socials,
     JSBoolean showWallets,
@@ -24,7 +24,7 @@ extension type JSWagmiWeb3Modal(JSObject _) implements JSObject {
     JSString configKey,
     JSArray<JSNumber> chains,
     JSWagmiCoreStorage storage,
-    JSWagmiWeb3ModalMetadata metadata,
+    JSWagmiAppKitMetadata metadata,
     JSBoolean email,
     JSArray<JSString>? socials,
     JSBoolean showWallets,
@@ -35,7 +35,7 @@ extension type JSWagmiWeb3Modal(JSObject _) implements JSObject {
     JSArray<JSString>? excludedWalletIds,
   );
 
-  external JSAppKit createWeb3Modal(
+  external JSAppKit createAppKit(
     JSConfig wagmiConfig,
     JSString projectId,
     // Optional - defaults to your Cloud configuration
@@ -58,8 +58,8 @@ extension type PublicStateControllerState._(JSObject _) implements JSObject {
   external JSString? activeChain;
 }
 
-extension Web3ModalStateFromJS on PublicStateControllerState {
-  Web3ModalState get toDart => Web3ModalState(
+extension AppKitStateFromJS on PublicStateControllerState {
+  AppKitState get toDart => AppKitState(
         loading: loading.toDart,
         open: open.toDart,
         selectedNetworkId: selectedNetworkId?.toDart,
@@ -68,8 +68,8 @@ extension Web3ModalStateFromJS on PublicStateControllerState {
 }
 
 @JS()
-extension type JSWagmiWeb3ModalMetadata._(JSObject _) implements JSObject {
-  external JSWagmiWeb3ModalMetadata({
+extension type JSWagmiAppKitMetadata._(JSObject _) implements JSObject {
+  external JSWagmiAppKitMetadata({
     required JSString name,
     required JSString description,
     required JSString url,

@@ -16,7 +16,7 @@ import 'package:webthree/crypto.dart';
 import 'package:webthree/webthree.dart';
 
 void main() {
-  runApp(const MaterialApp(title: 'Web3Modal Example', home: MyApp()));
+  runApp(const MaterialApp(title: 'Reown AppKit Example', home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
       () async {
         await wagmi.init();
 
-        wagmi.Web3Modal.init(
+        wagmi.AppKit.init(
           projectId: _projectId,
           chains: [
             wagmi.Chain.mainnet.id,
@@ -87,11 +87,11 @@ class _MyAppState extends State<MyApp> {
           ],
           enableAnalytics: true,
           enableOnRamp: true,
-          metadata: wagmi.Web3ModalMetadata(
-            name: 'Web3Modal',
-            description: 'Web3Modal Example',
+          metadata: wagmi.AppKitMetadata(
+            name: 'Reown AppKit',
+            description: 'Reown AppKit Example',
             // url must match your domain & subdomain
-            url: 'https://web3modal.com',
+            url: 'https://reown.com',
             icons: ['https://avatars.githubusercontent.com/u/37784886'],
           ),
           email: false, // email
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
         );
 
         // create config
-        wagmi.Web3Modal.createConfig(
+        wagmi.AppKit.createConfig(
           projectId: _projectId,
           configKey: 'withWSSTransport',
           chains: [
@@ -114,11 +114,11 @@ class _MyAppState extends State<MyApp> {
             wagmi.Chain.polygonAmoy.id,
             // wagmi.Chain.polygon.id,
           ],
-          metadata: wagmi.Web3ModalMetadata(
-            name: 'Web3Modal',
-            description: 'Web3Modal Example',
+          metadata: wagmi.AppKitMetadata(
+            name: 'Reown AppKit',
+            description: 'Reown AppKit Example',
             // url must match your domain & subdomain
-            url: 'https://web3modal.com',
+            url: 'https://reown.com',
             icons: ['https://avatars.githubusercontent.com/u/37784886'],
           ),
           email: false, // email
@@ -150,7 +150,7 @@ class _MyAppState extends State<MyApp> {
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Web3Modal'),
+              const Text('Reown AppKit'),
               const SizedBox(width: 8),
               _buildVersionBanner(),
             ],
@@ -182,7 +182,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const ElevatedButton(
-              onPressed: wagmi.Web3Modal.open,
+              onPressed: wagmi.AppKit.open,
               child: Text('Connect Wallet'),
             ),
             const SizedBox(

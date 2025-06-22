@@ -1,6 +1,6 @@
 import { Config } from "@wagmi/core"
-import { AppKit, PublicStateControllerState } from "@web3modal/base"
-import * as Web3modal from '@web3modal/wagmi'
+import { createAppKit } from "@reown/appkit"
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { Chain, Client, createClient, EIP1193RequestFn, http, Transport, webSocket } from "viem"
 import { chainsFromIds } from "./chains"
 import { JSWagmiContext } from "./context"
@@ -9,13 +9,13 @@ import { JSHttpTransport, JSTransport, JSTransportBuilder, JSWebsocketTransport 
 import { JSWagmiCoreStorage } from "./wagmi_core"
 
 
-export class JSWeb3Modal {
-    _modalInstance: AppKit | undefined
-    _modal() {
-        if (this._modalInstance === undefined) {
-            throw new Error('Wagmi not initialized. Call `Web3Modal.init` first.')
+export class JSAppKit {
+    _appKitInstance: ReturnType<typeof createAppKit> | undefined
+    _appKit() {
+        if (this._appKitInstance === undefined) {
+            throw new Error('Wagmi not initialized. Call `AppKit.init` first.')
         }
-        return this._modalInstance
+        return this._appKitInstance
     }
     init(
         projectId: string,
@@ -39,28 +39,32 @@ export class JSWeb3Modal {
         excludeWalletIds: string[] | undefined, // Warning the name is not the same with documentation... https://docs.reown.com/appkit/flutter/core/options
 
     ) {
-        JSWagmiContext.instance.config = Web3modal.defaultWagmiConfig({
-            chains: chainsFromIds(chains),
+        const chainsList = chainsFromIds(chains)
+        
+        const wagmiAdapter = new WagmiAdapter({
+            networks: chainsList,
             projectId: projectId,
             storage: storage.create(),
-            metadata: metadata,
-            auth: {
-                email: email,
-                socials: socials?.length === 0 ? undefined : socials,
-                showWallets: showWallets,
-                walletFeatures: walletFeatures
-            },
             client: !transportBuilder ? undefined : this.#clientBuilder(transportBuilder),
         })
 
-        this._modalInstance = Web3modal.createWeb3Modal({
-            wagmiConfig: JSWagmiContext.instance.config,
+        JSWagmiContext.instance.config = wagmiAdapter.wagmiConfig
+
+        this._appKitInstance = createAppKit({
+            adapters: [wagmiAdapter],
+            networks: chainsList,
             projectId: projectId,
-            enableAnalytics: enableAnalytics, // Optional - defaults to your Cloud configuration
-            enableOnramp: enableOnRamp, // Optional - false as default
-            includeWalletIds: includeWalletIds, // Optional
-            featuredWalletIds: featuredWalletIds, // Optional
-            excludeWalletIds: excludeWalletIds, // Optional
+            metadata: metadata,
+            features: {
+                analytics: enableAnalytics,
+                onramp: enableOnRamp,
+                email: email,
+                socials: socials?.length === 0 ? [] : socials || [],
+                emailShowWallets: showWallets,
+            },
+            includeWalletIds: includeWalletIds,
+            featuredWalletIds: featuredWalletIds,
+            excludeWalletIds: excludeWalletIds,
         })
     }
 
@@ -83,20 +87,16 @@ export class JSWeb3Modal {
         transportBuilder: JSTransportBuilder | undefined
 
     ): Config {
-        const config = Web3modal.defaultWagmiConfig({
-            chains: chainsFromIds(chains),
+        const chainsList = chainsFromIds(chains)
+        
+        const wagmiAdapter = new WagmiAdapter({
+            networks: chainsList,
             projectId: projectId,
             storage: storage.create(),
-            metadata: metadata,
-            auth: {
-                email: email,
-                socials: socials?.length === 0 ? undefined : socials,
-                showWallets: showWallets,
-                walletFeatures: walletFeatures
-            },
             client: !transportBuilder ? undefined : this.#clientBuilder(transportBuilder),
-
         })
+        
+        const config = wagmiAdapter.wagmiConfig
         JSWagmiContext.instance.setConfig(configKey, config)
         return config
     }
@@ -107,18 +107,18 @@ export class JSWeb3Modal {
         await waitForFocus()
 
         await setTimeout( // Quickfix for https://github.com/archethic-foundation/wagmi_flutter_web/issues/76
-            async () => await this._modal().open(),
+            async () => await this._appKit().open(),
             300,
         )
     }
 
     async close(): Promise<void> {
         await waitForFocus()
-        await this._modal().close()
+        await this._appKit().close()
     }
 
-    subscribeState(callback: (newState: PublicStateControllerState) => void): () => void {
-        return this._modal().subscribeState(callback)
+    subscribeState(callback: (newState: any) => void): () => void {
+        return this._appKit().subscribeState(callback)
     }
 
     #clientBuilder(transportBuilder: JSTransportBuilder): ((parameters: { chain: Chain; }) => Client<Transport<string, Record<string, any>, EIP1193RequestFn>, Chain>) {
