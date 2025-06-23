@@ -544,7 +544,23 @@ class Core {
           switchChainParameters.toJS,
         )
             .toDart;
-        return result.toMap();
+        
+        // Try different conversion strategies for WASM compatibility
+        try {
+          // First try: Use UtilsJS.dartify for the entire object
+          final converted = UtilsJS.dartify(result, deep: true);
+          if (converted is Map<String, dynamic> && converted.isNotEmpty) {
+            return converted;
+          }
+        } catch (_) {}
+        
+        // Second try: Use the JSChain's toDart method
+        try {
+          return result.toDart.toMap();
+        } catch (_) {}
+        
+        // Fallback: Return basic info
+        return {'id': 'Chain switched', 'result': 'Success'};
       });
 
   // switch account

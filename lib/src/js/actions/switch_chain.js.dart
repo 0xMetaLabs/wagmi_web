@@ -4,13 +4,13 @@ part of '../wagmi.js.dart';
 @JS()
 extension type JSSwitchChainParameters._(JSObject _) implements JSObject {
   external JSSwitchChainParameters({
-    required JSAny connector,
+    JSAny? connector,
     JSAny? addEthereumChainParameter,
-    JSNumber chainId,
+    required JSNumber chainId,
   });
   external JSAny? addEthereumChainParameter;
   external JSNumber chainId;
-  external JSConnector connector;
+  external JSAny? connector;
 }
 
 @JS()

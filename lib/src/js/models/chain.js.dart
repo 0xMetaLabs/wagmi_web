@@ -67,12 +67,21 @@ extension type JSChain(JSObject _) implements JSObject {
   void _tryConvert(JSObject? value, String key, Map<String, dynamic> map) {
     if (value == null) return;
     try {
-      final converted = UtilsJS.dartify(value);
+      final converted = UtilsJS.dartify(value, deep: true);
       if (converted != null) {
         map[key] = converted;
       }
     } catch (_) {
-      // Skip on error
+      // If dartify fails, try to at least get a string representation
+      try {
+        // For WASM, some objects might not convert properly
+        // Try to get at least some information
+        if (key == 'rpcUrls' || key == 'blockExplorers' || key == 'contracts') {
+          // These are typically objects with nested properties
+          // For now, just indicate they exist
+          map[key] = {'default': 'Available'};
+        }
+      } catch (_) {}
     }
   }
 

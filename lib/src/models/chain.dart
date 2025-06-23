@@ -364,4 +364,25 @@ class Chain {
   static const palmTestnet = Chain(id: 11297108099, name: 'palmTestnet');
   static const palm = Chain(id: 11297108109, name: 'palm');
   static const kakarotSepolia = Chain(id: 107107114116, name: 'kakarotSepolia');
+  
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      if (nativeCurrency != null) 'nativeCurrency': {
+        'name': nativeCurrency!.name,
+        'symbol': nativeCurrency!.symbol,
+        'decimals': nativeCurrency!.decimals,
+      },
+      if (rpcUrls != null) 'rpcUrls': rpcUrls,
+      if (blockExplorers != null) 'blockExplorers': blockExplorers,
+      if (contracts != null) 'contracts': contracts,
+      if (sourceId != null) 'sourceId': sourceId,
+      if (testnet != null) 'testnet': testnet,
+      if (custom != null) 'custom': custom,
+      if (fees != null) 'fees': fees,
+      if (formatters != null) 'formatters': formatters,
+      if (serializers != null) 'serializers': serializers,
+    };
+  }
 }

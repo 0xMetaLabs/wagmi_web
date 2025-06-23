@@ -28,6 +28,20 @@ extension type JSError._(JSObject _) implements JSObject {
         version: version?.toDart,
         cause: cause?.toDart,
         docsPath: docsPath?.toDart,
-        details: toMap(),
+        details: _safeToMap(),
       );
+  
+  Map<String, dynamic> _safeToMap() {
+    try {
+      return toMap();
+    } catch (_) {
+      // If toMap fails (e.g., hasOwnProperty not available), 
+      // return a map with basic error info
+      return {
+        'message': message,
+        'name': name,
+        'shortMessage': shortMessage,
+      };
+    }
+  }
 }
