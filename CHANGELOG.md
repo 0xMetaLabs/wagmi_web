@@ -1,3 +1,55 @@
+## 2.0.2
+
+### WASM Compatibility Improvements
+
+This release focuses on improving WASM (WebAssembly) compatibility for Flutter Web applications compiled to WASM.
+
+#### Bug Fixes
+
+**Chain Data Handling:**
+- Fixed `getChains()` returning "Unknown Chain" and missing native currency information in WASM builds
+- Improved JSChain type definition with explicit property declarations for WASM compatibility
+- Added proper conversion for native currency properties (name, symbol, decimals)
+- Enhanced chain object conversion with multiple fallback strategies
+
+**Array Handling:**
+- Fixed `getBlock()` throwing "Type 'JSValue' is not a subtype of type 'List<dynamic>?'" error in WASM
+- Added proper JSArray to Dart List conversion with WASM-specific fallbacks
+- Fixed array indexing issues in WASM environments
+
+**Contract Calls:**
+- Fixed `readContracts()` throwing "Type 'Null' is not a subtype of type 'Map<String, dynamic>'" error in WASM
+- Improved null handling for failed contract calls
+- Enhanced conversion logic to handle various result types
+
+**Chain Switching:**
+- Fixed `switchChain()` functionality in WASM builds
+- Removed connector parameter requirement (now uses current connector automatically)
+- Fixed JSError conversion issues causing "obj.hasOwnProperty is not a function" errors
+- Improved chain property extraction in switchChain results
+
+#### Technical Improvements
+
+**Type Safety:**
+- Added explicit external getter declarations for all JS interop types
+- Enhanced JSArray extension with length property and index operator
+- Improved error handling with try-catch blocks for each property access
+
+**Conversion Strategies:**
+- Implemented dual-approach conversion: standard toDart for JS, manual extraction for WASM
+- Added UtilsJS.dartify as primary conversion method with fallbacks
+- Created helper methods for consistent type conversion
+
+**Code Quality:**
+- Reduced code duplication with reusable conversion helpers
+- Added comprehensive error handling for edge cases
+- Improved maintainability with cleaner separation of concerns
+
+### Developer Notes
+- When building for WASM, use `flutter build web --wasm`
+- All chain properties should now display correctly in both JS and WASM builds
+- Failed operations now return empty objects/arrays instead of throwing errors
+
 ## 2.0.1
 
 ### Bug Fixes
