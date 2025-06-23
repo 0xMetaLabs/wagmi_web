@@ -67,9 +67,31 @@ extension type JSGetBlockReturnType(JSObject _) implements JSObject {
         timestamp: timestamp?.toDart,
         totalDifficulty: totalDifficulty?.toDart,
         transactionsRoot: transactionsRoot?.toDart,
-        uncles: uncles?.jsify() as List<dynamic>?,
-        transactions: transactions?.toDart,
+        uncles: _convertJSArrayToDartList(uncles),
+        transactions: _convertJSArrayToDartList(transactions),
       );
+  
+  List<dynamic>? _convertJSArrayToDartList(JSArray<JSAny>? jsArray) {
+    if (jsArray == null) return null;
+    
+    try {
+      // Try standard toDart conversion first (works in JS)
+      return jsArray.toDart.map((item) => UtilsJS.dartify(item)).toList();
+    } catch (e) {
+      // WASM fallback: use direct array indexing
+      try {
+        final list = <dynamic>[];
+        final length = jsArray.length;
+        for (var i = 0; i < length; i++) {
+          list.add(UtilsJS.dartify(jsArray[i]));
+        }
+        return list;
+      } catch (_) {
+        // If all else fails, return empty list
+        return [];
+      }
+    }
+  }
 }
 
 @JS()
