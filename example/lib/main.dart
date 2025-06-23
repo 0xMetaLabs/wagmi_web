@@ -98,10 +98,11 @@ class _MyAppState extends State<MyApp> {
           showWallets: true, // showWallets
           walletFeatures: true, // walletFeatures
           // Use https://explorer.walletconnect.com/?type=wallet to find wallet ids
-          includeWalletIds: [
-            'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
-            '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369', // Rainbow
-          ],
+          // includeWalletIds: [
+          //   'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // MetaMask
+          //   '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369', // Rainbow
+          //   // Trust Wallet
+          // ],
         );
 
         // create config
@@ -1582,6 +1583,29 @@ class _MyAppState extends State<MyApp> {
     // list of multiple contract methods response
     List<Map<String, dynamic>> multipleContractMethodsResponse,
   ) {
+    // Check if the response is empty or doesn't have expected results
+    if (multipleContractMethodsResponse.isEmpty || 
+        multipleContractMethodsResponse.length < 2) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text('Failed to read contracts. Response was empty or incomplete. Got ${multipleContractMethodsResponse.length} results, expected 2.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Close'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+    
     final totalSupply = multipleContractMethodsResponse[0]['result'] as BigInt?;
     final balance = multipleContractMethodsResponse[1]['result'] as BigInt?;
 

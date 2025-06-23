@@ -1,3 +1,9 @@
+## 2.0.1
+
+### Bug Fixes
+- Fixed `readContracts` returning empty array due to Map conversion issue in WASM compatibility layer
+- Updated `UtilsJS.jsify()` to properly handle `LinkedMap<dynamic, dynamic>` and other Map types, not just `Map<String, dynamic>`
+
 ## 2.0.0 - BREAKING CHANGES
 
 ### Migration from Web3Modal to Reown AppKit

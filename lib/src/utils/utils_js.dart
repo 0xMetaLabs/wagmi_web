@@ -78,7 +78,14 @@ class UtilsJS {
       if (dartObject is Float64List) return dartObject.toJS;
       if (dartObject is List) return dartObject.toJSArray;
       if (dartObject is Map) {
-        return (dartObject as Map<String, dynamic>).toJSObject;
+        // Handle any type of Map, not just Map<String, dynamic>
+        final jsObject = JSObject();
+        dartObject.forEach((key, value) {
+          if (key is String) {
+            jsObject[key] = UtilsJS.jsify(value);
+          }
+        });
+        return jsObject;
       }
       return dartObject.jsify();
     } catch (e) {
