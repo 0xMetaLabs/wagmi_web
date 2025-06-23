@@ -232,7 +232,33 @@ class Core {
           readContractsParameters.toJS,
         )
             .toDart;
-        return result.toDartDynamicList.cast<Map<String, dynamic>>();
+        
+        // Handle the conversion more carefully for WASM compatibility
+        final List<dynamic> dynamicList = result.toDartDynamicList;
+        final List<Map<String, dynamic>> resultList = [];
+        
+        for (final item in dynamicList) {
+          if (item == null) {
+            // Add empty map for null results (failed contract calls)
+            resultList.add({});
+          } else if (item is Map<String, dynamic>) {
+            resultList.add(item);
+          } else {
+            // Try to convert to Map if it's not already
+            try {
+              final converted = UtilsJS.dartify(item);
+              if (converted is Map<String, dynamic>) {
+                resultList.add(converted);
+              } else {
+                resultList.add({});
+              }
+            } catch (_) {
+              resultList.add({});
+            }
+          }
+        }
+        
+        return resultList;
       });
 
   // get transaction receipt
