@@ -79,9 +79,38 @@ class Core {
     _logAction('getChains');
     final result = window.wagmiCore.getChains();
 
-    return result.toDart.map((item) {
-      return Chain.fromMap(item.toMap());
-    }).toList();
+    try {
+      final chains = <Chain>[];
+
+      // Try standard toDart conversion first (works in JS)
+      try {
+        final dartList = result.toDart;
+        for (final jsChain in dartList) {
+          chains.add(jsChain.toDart);
+        }
+
+        if (chains.isNotEmpty) {
+          return chains;
+        }
+      } catch (e) {
+        // Fall through to WASM approach
+      }
+
+      // WASM fallback: use direct array indexing
+      try {
+        final length = result.length;
+        for (var i = 0; i < length; i++) {
+          final jsChain = result[i];
+          chains.add(jsChain.toDart);
+        }
+      } catch (e) {
+        // Complete failure
+      }
+
+      return chains;
+    } catch (e) {
+      return <Chain>[];
+    }
   });
 
   static Future<BigInt> getBlockNumber(

@@ -18,7 +18,7 @@ extension type JSWagmiCore(JSObject _) implements JSObject {
   external JSAccount getAccount();
   external JSNumber getChainId();
   external JSArray<JSConnection> getConnections();
-  external JSArray<JSObject> getChains();
+  external JSArray<JSChain> getChains();
   external JSPromise<JSBigInt> getBlockNumber(
     JSString configKey,
     JSGetBlockNumberParameters getBlockNumberParameters,
