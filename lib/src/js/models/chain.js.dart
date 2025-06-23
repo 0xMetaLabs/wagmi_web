@@ -67,7 +67,7 @@ extension type JSChain(JSObject _) implements JSObject {
   void _tryConvert(JSObject? value, String key, Map<String, dynamic> map) {
     if (value == null) return;
     try {
-      final converted = UtilsJS.dartify(value, deep: true);
+      final converted = UtilsJS.dartify(value);
       if (converted != null) {
         map[key] = converted;
       }

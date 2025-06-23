@@ -66,7 +66,8 @@ extension type JSConnector(JSObject _) implements JSObject {
 
 // WASM-safe function converters
 dynamic Function({int? chainId, bool? isReconnecting}) _convertConnectFunction(
-    JSFunction jsFunc) {
+    JSFunction jsFunc,
+) {
   return ({int? chainId, bool? isReconnecting}) {
     final args = <JSAny?>[];
     if (chainId != null || isReconnecting != null) {
@@ -113,7 +114,8 @@ bool Function() _convertIsAuthorizedFunction(JSFunction jsFunc) {
 }
 
 Function({List<dynamic> accounts}) _convertOnAccountsChangedFunction(
-    JSFunction jsFunc) {
+    JSFunction jsFunc,
+) {
   return ({List<dynamic>? accounts}) {
     final jsAccounts = (accounts ?? []).toJSArray;
     return jsFunc.callAsFunction(null, jsAccounts);
@@ -137,7 +139,8 @@ Function({int? chain}) _convertOnChainChangedFunction(JSFunction jsFunc) {
 }
 
 Function({dynamic connectionInfo}) _convertOnConnectFunction(
-    JSFunction jsFunc) {
+    JSFunction jsFunc,
+) {
   return ({dynamic connectionInfo}) {
     final args = <JSAny?>[];
     if (connectionInfo != null) {
@@ -179,8 +182,9 @@ _convertSwitchChainFunction(JSFunction jsFunc) {
     final args = <JSAny?>[];
     if (addEthereumChainParameter != null || chainId != null) {
       final params = <String, dynamic>{};
-      if (addEthereumChainParameter != null)
+      if (addEthereumChainParameter != null) {
         params['addEthereumChainParameter'] = addEthereumChainParameter;
+      }
       if (chainId != null) params['chainId'] = chainId;
       args.add(params.toJSObject);
     }

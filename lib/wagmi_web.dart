@@ -2,6 +2,7 @@ library wagmi_flutter_web;
 
 import 'dart:async';
 import 'dart:js_interop';
+
 import 'package:web/web.dart';
 
 export 'src/actions/call.dart';
@@ -63,8 +64,8 @@ export 'src/models/message_to_sign.dart';
 export 'src/models/transport.dart';
 export 'src/utils/ether_amount.dart';
 export 'src/utils/utils_js.dart';
-export 'src/wagmi_core.dart';
 export 'src/wagmi_appkit.dart';
+export 'src/wagmi_core.dart';
 
 var _isReady = false;
 

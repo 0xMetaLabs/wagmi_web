@@ -159,8 +159,8 @@ extension JSObjectToMap on JSObject {
 
     try {
       // Get the keys of the JSObject using dart:js_interop
-      final JSArray<JSString> jsKeys = _objectKeys(this);
-      final List<String> keys =
+      final jsKeys = _objectKeys(this);
+      final keys =
       jsKeys.toDart.map((jsString) => jsString.toDart).toList();
 
       // Iterate over the keys and assign values to the Dart map

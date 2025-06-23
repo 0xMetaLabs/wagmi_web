@@ -27,7 +27,8 @@ extension JSFunctionToDart on JSFunction {
             return jsFunc.callAsFunction(null, args[0], args[1], args[2]);
           case 4:
             return jsFunc.callAsFunction(
-                null, args[0], args[1], args[2], args[3]);
+                null, args[0], args[1], args[2], args[3],
+            );
           default:
             return jsFunc.callAsFunction();
         }

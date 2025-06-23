@@ -235,7 +235,7 @@ class Core {
         
         // Handle the conversion more carefully for WASM compatibility
         final List<dynamic> dynamicList = result.toDartDynamicList;
-        final List<Map<String, dynamic>> resultList = [];
+        final resultList = <Map<String, dynamic>>[];
         
         for (final item in dynamicList) {
           if (item == null) {
@@ -548,7 +548,7 @@ class Core {
         // Try different conversion strategies for WASM compatibility
         try {
           // First try: Use UtilsJS.dartify for the entire object
-          final converted = UtilsJS.dartify(result, deep: true);
+          final converted = UtilsJS.dartify(result);
           if (converted is Map<String, dynamic> && converted.isNotEmpty) {
             return converted;
           }

@@ -4,13 +4,12 @@ version: 2.0.2
 homepage: https://github.com/0xMetaLabs/wagmi_web
 
 environment:
-  sdk: ">=3.3.3 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
   # Collections and utilities functions and classes related to collections
   collection: ^1.18.0
-  web: ^1.1.1
-
+  
   # The decimal package allows you to deal with decimal numbers without losing precision
   decimal: ^3.0.2
 
@@ -25,6 +24,8 @@ dependencies:
 
   # Logging lib
   logging: ^1.2.0
+  
+  web: ^1.1.1
 
 dev_dependencies:
   # A build system for Dart code generation and modular compilation.

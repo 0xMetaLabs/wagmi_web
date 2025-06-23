@@ -76,7 +76,7 @@ extension type JSGetBlockReturnType(JSObject _) implements JSObject {
     
     try {
       // Try standard toDart conversion first (works in JS)
-      return jsArray.toDart.map((item) => UtilsJS.dartify(item)).toList();
+      return jsArray.toDart.map(UtilsJS.dartify).toList();
     } catch (e) {
       // WASM fallback: use direct array indexing
       try {
