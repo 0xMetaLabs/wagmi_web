@@ -22,10 +22,20 @@ class VerifyMessageParameters {
 
   JSVerifyMessageParameters get toJS => JSVerifyMessageParameters(
         address: address.toJS,
-        message: message,
+        message: _convertMessage(message),
         signature: signature.toJS,
         chainId: chainId?.toJS,
         blockNumber: blockNumber?.toJS,
         blockTag: blockTag?.toJS,
       );
+  
+  JSAny _convertMessage(dynamic message) {
+    if (message is String) {
+      return message.toJS;
+    } else if (message is JSAny) {
+      return message;
+    } else {
+      throw ArgumentError('Message must be a String or JSAny');
+    }
+  }
 }

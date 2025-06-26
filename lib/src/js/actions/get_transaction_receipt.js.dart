@@ -38,7 +38,7 @@ extension type JSGetTransactionReceiptReturnType(JSObject _)
         effectiveGasPrice: effectiveGasPrice.toDart,
         from: from.toDart,
         gasUsed: gasUsed.toDart,
-        logs: logs.jsify()! as List<dynamic>,
+        logs: logs.toDart.map((jsLog) => (jsLog as JSLog).toDart).toList(),
         logsBloom: logsBloom.toDart,
         status: status.toDart,
         to: to?.toDart,

@@ -1,3 +1,21 @@
+## 2.0.3
+
+### WASM Compatibility Fixes
+
+This release fixes additional WASM compatibility issues for message verification and transaction receipt handling.
+
+#### Bug Fixes
+
+**Message Verification:**
+- Fixed `verifyMessage` throwing "Type 'String' is not a subtype of type 'JSValue'" error in WASM
+- Added proper String to JSAny conversion for message parameters
+- Implemented helper method to handle both String and JSAny message types
+
+**Transaction Receipt Handling:**
+- Fixed `waitForTransactionReceipt` throwing "Type 'JSValue' is not a subtype of type 'List<dynamic>'" error in WASM
+- Fixed similar issue in `getTransactionReceipt`
+- Properly convert JSArray of logs using JSLog.toDart getter instead of jsify()
+
 ## 2.0.2
 
 ### WASM Compatibility Improvements
