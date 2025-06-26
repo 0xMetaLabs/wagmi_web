@@ -234,27 +234,56 @@ class Core {
             .toDart;
         
         // Handle the conversion more carefully for WASM compatibility
-        final List<dynamic> dynamicList = result.toDartDynamicList;
         final resultList = <Map<String, dynamic>>[];
         
-        for (final item in dynamicList) {
-          if (item == null) {
-            // Add empty map for null results (failed contract calls)
-            resultList.add({});
-          } else if (item is Map<String, dynamic>) {
-            resultList.add(item);
-          } else {
-            // Try to convert to Map if it's not already
+        // Directly access each JSObject in the array
+        for (var i = 0; i < result.length; i++) {
+          try {
+            final jsItem = result[i];
+            
+            // Create a map to store the converted result
+            final convertedMap = <String, dynamic>{};
+            
+            // Try to access common properties directly
             try {
-              final converted = UtilsJS.dartify(item);
+              // Access the 'result' property
+              final resultValue = jsItem['result'];
+              if (resultValue != null) {
+                // Handle BigInt conversion specifically
+                if (resultValue is JSBigInt) {
+                  convertedMap['result'] = resultValue.toDart;
+                } else {
+                  convertedMap['result'] = UtilsJS.dartify(resultValue);
+                }
+              }
+              
+              // Access the 'status' property
+              final statusValue = jsItem['status'];
+              if (statusValue != null) {
+                convertedMap['status'] = statusValue is JSString 
+                    ? statusValue.toDart 
+                    : UtilsJS.dartify(statusValue);
+              }
+              
+              // Access the 'error' property if it exists
+              final errorValue = jsItem['error'];
+              if (errorValue != null) {
+                convertedMap['error'] = UtilsJS.dartify(errorValue);
+              }
+              
+              resultList.add(convertedMap);
+            } catch (e) {
+              // If direct property access fails, try the general conversion
+              final converted = UtilsJS.dartify(jsItem);
               if (converted is Map<String, dynamic>) {
                 resultList.add(converted);
               } else {
                 resultList.add({});
               }
-            } catch (_) {
-              resultList.add({});
             }
+          } catch (e) {
+            // If all else fails, add an empty map
+            resultList.add({});
           }
         }
         

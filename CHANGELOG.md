@@ -1,3 +1,23 @@
+## 2.0.4
+
+### WASM Compatibility Fixes for Contract Reading and Wallet Reconnection
+
+This release fixes critical WASM compatibility issues for contract reading and wallet reconnection functionality.
+
+#### Bug Fixes
+
+**Contract Reading:**
+- Fixed `readContracts` returning 0 values in WASM mode while working correctly in JS mode
+- Improved BigInt handling by directly accessing object properties instead of relying on generic conversion
+- Added specific JSBigInt detection and conversion using `toDart` method
+- Implemented fallback strategies for robust error handling
+
+**Wallet Reconnection:**
+- Fixed "Type 'Null' is not a subtype of type 'JSValue'" error when reconnecting wallets after page refresh in WASM
+- Added comprehensive error handling in JSReconnectReturnType conversion
+- Implemented safe connector property access with null checks
+- Added graceful degradation to prevent crashes during reconnection failures
+
 ## 2.0.3
 
 ### WASM Compatibility Fixes

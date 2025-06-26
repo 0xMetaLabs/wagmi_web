@@ -14,18 +14,45 @@ extension type JSReconnectReturnType(JSObject _) implements JSObject {
   external JSArray<JSObject>? connections;
   ReconnectReturnType get toDart {
     // convert this to dart object
-    // ignore: unnecessary_this
-    final connections = this.jsify()! as JSArray<JSObject>;
-    if (connections.toDart.isEmpty) {
+    final connections = this.connections;
+    if (connections == null || connections.toDart.isEmpty) {
       return ReconnectReturnType(connections: []);
     }
-    final connectionList = connections.toDart.map((log) {
-      final sMap = log.toMap(deep: false);
-      sMap['connector'] = (sMap['connector'] as JSObject).toMap(deep: false);
-      return sMap;
-    }).toList();
-    final connection1 = connectionList.map(Connection.fromJson).toList();
-    return ReconnectReturnType(connections: connection1);
+    
+    try {
+      final connectionList = connections.toDart.map((log) {
+        try {
+          final sMap = log.toMap(deep: false);
+          // Safely access and convert the connector property
+          final connectorObj = sMap['connector'];
+          if (connectorObj != null && connectorObj is JSObject) {
+            sMap['connector'] = connectorObj.toMap(deep: false);
+          }
+          return sMap;
+        } catch (e) {
+          // If conversion fails, return minimal valid structure
+          return <String, dynamic>{};
+        }
+      }).toList();
+      
+      // Filter out empty maps and convert to Connection objects
+      final validConnections = connectionList
+          .where((map) => map.isNotEmpty)
+          .map((map) {
+            try {
+              return Connection.fromJson(map);
+            } catch (e) {
+              return null;
+            }
+          })
+          .whereType<Connection>()
+          .toList();
+      
+      return ReconnectReturnType(connections: validConnections);
+    } catch (e) {
+      // If all else fails, return empty connections
+      return ReconnectReturnType(connections: []);
+    }
   }
 }
 @JS()
