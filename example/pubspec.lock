@@ -50,10 +50,10 @@ packages:
     dependency: transitive
     description:
       name: build
-      sha256: "7cf79af8eb6023bee797a77b067fb6e63ac5650f3789546e023958098feb776e"
+      sha256: "51dc711996cbf609b90cbe5b335bbce83143875a9d58e4b5c6d3c4f684d3dda7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.2"
+    version: "2.5.4"
   build_config:
     dependency: transitive
     description:
@@ -74,26 +74,26 @@ packages:
     dependency: transitive
     description:
       name: build_resolvers
-      sha256: "7a507e6026abe52074836d51a945bfad456daa7493eb7a6cac565e490e7d5b54"
+      sha256: ee4257b3f20c0c90e72ed2b57ad637f694ccba48839a821e87db762548c22a62
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.2"
+    version: "2.5.4"
   build_runner:
     dependency: transitive
     description:
       name: build_runner
-      sha256: "1ce1e5063b564f26c27bda54c82a3d38339df69ec58f90e0017f447de77e4839"
+      sha256: "382a4d649addbfb7ba71a3631df0ec6a45d5ab9b098638144faf27f02778eb53"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.2"
+    version: "2.5.4"
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
-      sha256: "564230f3fd9363df7870058fef11ec5502ee620aec3b1ee8106b943be5c63a76"
+      sha256: "85fbbb1036d576d966332a3f5ce83f2ce66a40bea1a94ad2d5fc29a19a0d3792"
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.0"
+    version: "9.1.2"
   built_collection:
     dependency: transitive
     description:
@@ -194,10 +194,10 @@ packages:
     dependency: "direct main"
     description:
       name: decimal
-      sha256: "6c2041df7caefc9393ae0b0dcc4abc700831014a2c252dd10e3952499673f0b2"
+      sha256: fc706a5618b81e5b367b01dd62621def37abc096f2b46a9bd9068b64c1fa36d0
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.2"
+    version: "3.2.4"
   fake_async:
     dependency: transitive
     description:
@@ -249,10 +249,10 @@ packages:
     dependency: transitive
     description:
       name: freezed_annotation
-      sha256: c87ff004c8aa6af2d531668b46a4ea379f7191dc6dfa066acd53d506da6e044b
+      sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -622,10 +622,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: "9d06212b1362abc2f0f0d78e6f09f726608c74e3b9462e8368bb03314aa8d603"
+      sha256: f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.1"
+    version: "6.3.2"
   url_launcher_android:
     dependency: transitive
     description:
@@ -736,7 +736,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.0.4"
+    version: "2.0.5"
   watcher:
     dependency: transitive
     description:

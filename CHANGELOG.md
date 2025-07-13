@@ -1,3 +1,6 @@
+## 2.0.5
+Updated Deps
+
 ## 2.0.4
 
 ### WASM Compatibility Fixes for Contract Reading and Wallet Reconnection

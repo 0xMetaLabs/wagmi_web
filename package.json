@@ -25,20 +25,20 @@
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "jest": "^30.0.2",
+    "jest": "^30.0.4",
     "terser-webpack-plugin": "^5.3.14",
     "ts-jest": "^29.4.0",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
-    "webpack": "^5.99.9",
+    "webpack": "^5.100.1",
     "webpack-cli": "^6.0.1",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
     "@wagmi/connectors": "^5.8.5",
     "@wagmi/core": "^2.17.3",
-    "@reown/appkit": "^1.7.10",
-    "@reown/appkit-adapter-wagmi": "^1.7.10",
-    "viem": "^2.31.4"
+    "@reown/appkit": "^1.7.13",
+    "@reown/appkit-adapter-wagmi": "^1.7.13",
+    "viem": "^2.31.7"
   }
 }
