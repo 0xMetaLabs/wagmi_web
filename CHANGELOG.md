@@ -1,3 +1,6 @@
+## 2.0.6
+Updated Deps
+
 ## 2.0.5
 Updated Deps
 
