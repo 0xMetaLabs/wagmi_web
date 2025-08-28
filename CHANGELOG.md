@@ -1,3 +1,6 @@
+## 2.0.7
+Updated Deps to Wagmi - 2.16.8
+
 ## 2.0.6
 Updated Deps
 
