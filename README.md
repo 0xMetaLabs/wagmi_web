@@ -14,6 +14,7 @@ Wagmi Web exposes the powerful [Wagmi](https://wagmi.sh/) SDK to your Flutter we
 ### Key Features
 
 - 🔗 **Wallet Connect Integration** - Connect to 300+ wallets through Reown AppKit (formerly WalletConnect) or injected web3 exposed by Wagmi.
+- ⚡ **Direct Modal Access** - Skip navigation and go directly to Activity, Buy Crypto, or Meld.io purchase flows
 - 🚀 **100% WASM Compatible** - Full support for WebAssembly compilation
 - 🛠️ **Comprehensive Ethereum Tools** - Access to Wagmi's complete suite of Web3 utilities
 - 📱 **Flutter Web Optimized** - Seamlessly integrates with Flutter's web platform
@@ -163,6 +164,120 @@ For detailed API documentation, visit [Wagmi Actions Documentation](https://wagm
 | `watchPendingTransactions`     | 🔴               |
 | `watchPublicClient`            | 🔴               |
 | `writeContract`                | ✅ Implemented   |
+
+## Direct Modal Access
+
+Wagmi Web provides direct access to specific AppKit modal views, allowing you to bypass the main modal interface and navigate users directly to the functionality they need.
+
+### Available Modal Methods
+
+#### 1. Activity View
+Access transaction history and activity directly:
+
+```dart
+// Opens the Activity/Transactions view directly
+await wagmi.AppKit.openActivity();
+```
+
+#### 2. Buy Crypto (OnRamp Providers)
+Show available crypto purchase providers:
+
+```dart
+// Opens the OnRamp providers selection
+await wagmi.AppKit.openBuyCrypto(); 
+```
+
+#### 3. Meld.io Direct Integration
+
+**The most powerful feature** - bypass all modals and go directly to Meld.io for crypto purchases:
+
+```dart
+// Default behavior - Meld.io auto-detects everything
+await wagmi.AppKit.openMeld();
+
+// Override specific parameters only when needed
+await wagmi.AppKit.openMeld(wagmi.MeldOptions(
+  countryCode: 'US',
+  sourceCurrencyCode: 'USD', 
+  destinationCurrencyCode: 'ETH',
+  amount: '100',
+));
+```
+
+### MeldOptions Configuration
+
+The `MeldOptions` class provides full control over the Meld.io integration:
+
+```dart
+class MeldOptions {
+  MeldOptions({
+    this.countryCode,           // 'US', 'IN', 'GB', etc.
+    this.country,               // 'USA', 'India', 'United Kingdom'
+    this.sourceCurrencyCode,    // 'USD', 'INR', 'GBP', 'EUR'
+    this.destinationCurrencyCode, // 'USDC', 'SOL', 'ETH', 'BTC'
+    this.walletAddress,         // Custom wallet address
+    this.amount,                // Pre-filled amount like '100'
+    this.paymentMethod,         // 'card', 'bank'
+    this.language,              // 'en', 'hi', 'es', 'fr'
+    this.locale,                // 'en-US', 'en-IN', 'es-ES'
+  });
+}
+```
+
+#### Smart Defaults
+
+When parameters are **not provided**, Meld.io automatically detects:
+- **Location & Currency** from IP geolocation
+- **Language** from browser settings  
+- **Payment Methods** available in user's region
+- **Crypto Token** based on active blockchain (SOL for Solana, USDC for Ethereum)
+
+Only override when you need specific behavior!
+
+### Usage Examples
+
+```dart
+// 1. Auto-detection (recommended for most users)
+await wagmi.AppKit.openMeld();
+
+// 2. Target specific crypto
+await wagmi.AppKit.openMeld(wagmi.MeldOptions(
+  destinationCurrencyCode: 'ETH',
+));
+
+// 3. Pre-fill purchase amount  
+await wagmi.AppKit.openMeld(wagmi.MeldOptions(
+  amount: '50',
+));
+
+// 4. Full regional customization
+await wagmi.AppKit.openMeld(wagmi.MeldOptions(
+  countryCode: 'GB',
+  sourceCurrencyCode: 'GBP',
+  destinationCurrencyCode: 'ETH',
+  amount: '100',
+  locale: 'en-GB',
+));
+
+// 5. Custom wallet (no connection required)
+await wagmi.AppKit.openMeld(wagmi.MeldOptions(
+  walletAddress: '0x1234567890abcdef...',
+  countryCode: 'US',
+));
+```
+
+### Key Benefits
+
+- ✅ **Streamlined UX** - Direct access to specific functionality
+- ✅ **Global Support** - Auto-detects user location and currency
+- ✅ **Flexible Configuration** - Override any parameter as needed
+- ✅ **No API Keys Required** - Built-in Meld.io integration
+- ✅ **Transaction Tracking** - Full AppKit progress tracking and callbacks
+
+### Requirements
+
+- **Wallet Connection**: All modal methods require an active wallet connection (unless using custom `walletAddress` in MeldOptions)
+- **Supported Networks**: Works with all AppKit-supported networks (Ethereum, Polygon, Solana, etc.)
 
 ## Development Environment
 

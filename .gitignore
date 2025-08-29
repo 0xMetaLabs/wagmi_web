@@ -38,3 +38,4 @@ assets/*.LICENSE.txt
 *.cache
 .firebaserc
 firebase.json
+CLAUDE.md

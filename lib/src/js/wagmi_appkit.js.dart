@@ -46,6 +46,9 @@ extension type JSWagmiAppKit(JSObject _) implements JSObject {
 
   external JSPromise<Null> open();
   external JSPromise<Null> close();
+  external JSPromise<Null> openActivity();
+  external JSPromise<Null> openBuyCrypto();
+  external JSPromise<Null> openMeld(JSObject? options);
 
   external JSFunction subscribeState(JSFunction callback);
 }

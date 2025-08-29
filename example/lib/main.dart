@@ -62,6 +62,7 @@ class _MyAppState extends State<MyApp> {
 
   final tabs = [
     const Tab(text: 'Main'),
+    const Tab(text: 'Modal Buttons'),
     const Tab(text: 'Test config switch'),
     const Tab(text: 'Read Contracts'),
     const Tab(text: 'Write Contracts'),
@@ -163,6 +164,7 @@ class _MyAppState extends State<MyApp> {
         body: TabBarView(
           children: [
             buildMainTab(),
+            buildModalButtonsTab(),
             ConfigSwitchExample(chainId: chainId),
             const ReadContractExample(),
             const WriteContractExample(),
@@ -988,6 +990,138 @@ class _MyAppState extends State<MyApp> {
             // ),
             const SizedBox(
               height: 7,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildModalButtonsTab() {
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Direct Modal Access',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Buttons to open specific AppKit modal views directly',
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            const SizedBox(height: 30),
+            
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  await wagmi.AppKit.openActivity();
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.toString())),
+                    );
+                  }
+                }
+              },
+              child: const Text('Open Activity'),
+            ),
+            const SizedBox(height: 10),
+            
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  await wagmi.AppKit.openBuyCrypto();
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.toString())),
+                    );
+                  }
+                }
+              },
+              child: const Text('Buy Crypto'),
+            ),
+            const SizedBox(height: 10),
+            
+            const Text(
+              'Meld.io Direct Access',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 10),
+            
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  // Default behavior - let Meld auto-detect everything
+                  // Auto-detects: location, currency, language, payment methods
+                  await wagmi.AppKit.openMeld();
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.toString())),
+                    );
+                  }
+                }
+              },
+              child: const Text('Buy with Meld (Default)'),
+            ),
+            const SizedBox(height: 10),
+            
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  // Override specific parameters (USA, USD, ETH)
+                  await wagmi.AppKit.openMeld(
+                    wagmi.MeldOptions(
+                      countryCode: 'US',
+                      sourceCurrencyCode: 'USD',
+                      destinationCurrencyCode: 'ETH',
+                      paymentMethod: 'card',
+                    ),
+                  );
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.toString())),
+                    );
+                  }
+                }
+              },
+              child: const Text('Buy ETH (USA/USD)'),
+            ),
+            const SizedBox(height: 10),
+            
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  // UK configuration with pre-filled amount
+                  await wagmi.AppKit.openMeld(
+                    wagmi.MeldOptions(
+                      countryCode: 'GB',
+                      country: 'United Kingdom',
+                      sourceCurrencyCode: 'GBP',
+                      amount: '100',
+                      locale: 'en-GB',
+                    ),
+                  );
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.toString())),
+                    );
+                  }
+                }
+              },
+              child: const Text('Buy £100 (UK)'),
+            ),
+            const SizedBox(height: 20),
+            
+            const Text(
+              'Note: All modal access buttons require wallet connection',
+              style: TextStyle(fontSize: 14, color: Colors.orange),
             ),
           ],
         ),

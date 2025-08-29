@@ -1,3 +1,6 @@
+## 2.0.8
+Direct Modal Access & Direct Meld.io Integration
+
 ## 2.0.7
 Updated Deps to Wagmi - 2.16.8
 
