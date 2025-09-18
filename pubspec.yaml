@@ -1,6 +1,6 @@
 name: wagmi_web
 description: "Wagmi JS SDK wrapper for Dart Web"
-version: 2.0.8
+version: 2.0.9
 homepage: https://github.com/0xMetaLabs/wagmi_web
 
 environment:
@@ -29,17 +29,17 @@ dependencies:
 
 dev_dependencies:
   # A build system for Dart code generation and modular compilation.
-  build_runner: ^2.4.8
+  build_runner: ^2.7.0
 
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 
   # Code generation for immutable classes that has a simple syntax/API without compromising on the features
-  freezed: ^3.0.6
+  freezed: ^3.2.3
 
   # Automatically generate code for converting to and from JSON by annotating Dart classes.
-  json_serializable: ^6.2.0
+  json_serializable: ^6.11.1
   test: ^1.25.2
 
 flutter:
