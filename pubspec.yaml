@@ -1,6 +1,6 @@
 name: wagmi_web
 description: "Wagmi JS SDK wrapper for Dart Web"
-version: 2.0.9
+version: 2.0.10
 homepage: https://github.com/0xMetaLabs/wagmi_web
 
 environment:
