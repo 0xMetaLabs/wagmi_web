@@ -35,10 +35,10 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@wagmi/connectors": "^5.11.2",
-    "@wagmi/core": "^2.21.2",
-    "@reown/appkit": "^1.8.9",
-    "@reown/appkit-adapter-wagmi": "^1.8.9",
-    "viem": "^2.38.0"
+    "@wagmi/connectors": "^6.1.4",
+    "@wagmi/core": "^2.22.1",
+    "@reown/appkit": "^1.8.13",
+    "@reown/appkit-adapter-wagmi": "^1.8.13",
+    "viem": "^2.38.6"
   }
 }

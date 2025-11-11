@@ -1,3 +1,7 @@
+## 2.0.11
+Updated dependencies to latest versions
+wagmi/core - 2.22.1
+
 ## 2.0.10
 Updated dependencies to latest versions
 wagmi/core - 2.21.2
