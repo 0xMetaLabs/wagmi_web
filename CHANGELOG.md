@@ -1,3 +1,8 @@
+## 2.22.2
+Resolved Issue with Chain Pasing
+Updated Deps
+wagmi/core - 2.22.1
+
 ## 2.22.1
 Updated dependencies to latest versions
 wagmi/core - 2.22.1
