@@ -1,3 +1,7 @@
+## 2.22.3
+added 654321 chain
+wagmi/core - 2.22.1
+
 ## 2.22.2
 Resolved Issue with Chain Pasing
 Updated Deps
