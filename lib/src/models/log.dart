@@ -9,6 +9,7 @@ class Log with _$Log {
     String? blockHash,
     BigInt? blockNumber,
     required String data,
+    @Default([]) List<String> topics,
     int? logIndex,
     String? transactionHash,
     int? transactionIndex,

@@ -611,7 +611,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.22.2"
+    version: "2.23.0"
   watcher:
     dependency: transitive
     description:
