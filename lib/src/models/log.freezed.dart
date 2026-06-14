@@ -20,6 +20,7 @@ mixin _$Log {
   String? get blockHash => throw _privateConstructorUsedError;
   BigInt? get blockNumber => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
+  List<String> get topics => throw _privateConstructorUsedError;
   int? get logIndex => throw _privateConstructorUsedError;
   String? get transactionHash => throw _privateConstructorUsedError;
   int? get transactionIndex => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $LogCopyWith<$Res> {
       String? blockHash,
       BigInt? blockNumber,
       String data,
+      List<String> topics,
       int? logIndex,
       String? transactionHash,
       int? transactionIndex,
@@ -65,6 +67,7 @@ class _$LogCopyWithImpl<$Res, $Val extends Log> implements $LogCopyWith<$Res> {
     Object? blockHash = freezed,
     Object? blockNumber = freezed,
     Object? data = null,
+    Object? topics = null,
     Object? logIndex = freezed,
     Object? transactionHash = freezed,
     Object? transactionIndex = freezed,
@@ -87,6 +90,10 @@ class _$LogCopyWithImpl<$Res, $Val extends Log> implements $LogCopyWith<$Res> {
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as String,
+      topics: null == topics
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       logIndex: freezed == logIndex
           ? _value.logIndex
           : logIndex // ignore: cast_nullable_to_non_nullable
@@ -118,6 +125,7 @@ abstract class _$$LogImplCopyWith<$Res> implements $LogCopyWith<$Res> {
       String? blockHash,
       BigInt? blockNumber,
       String data,
+      List<String> topics,
       int? logIndex,
       String? transactionHash,
       int? transactionIndex,
@@ -139,6 +147,7 @@ class __$$LogImplCopyWithImpl<$Res> extends _$LogCopyWithImpl<$Res, _$LogImpl>
     Object? blockHash = freezed,
     Object? blockNumber = freezed,
     Object? data = null,
+    Object? topics = null,
     Object? logIndex = freezed,
     Object? transactionHash = freezed,
     Object? transactionIndex = freezed,
@@ -161,6 +170,10 @@ class __$$LogImplCopyWithImpl<$Res> extends _$LogCopyWithImpl<$Res, _$LogImpl>
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as String,
+      topics: null == topics
+          ? _value._topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       logIndex: freezed == logIndex
           ? _value.logIndex
           : logIndex // ignore: cast_nullable_to_non_nullable
@@ -189,11 +202,13 @@ class _$LogImpl extends _Log {
       this.blockHash,
       this.blockNumber,
       required this.data,
+      final List<String> topics = const [],
       this.logIndex,
       this.transactionHash,
       this.transactionIndex,
       required this.removed})
-      : super._();
+      : _topics = topics,
+        super._();
 
   @override
   final String address;
@@ -203,6 +218,15 @@ class _$LogImpl extends _Log {
   final BigInt? blockNumber;
   @override
   final String data;
+  final List<String> _topics;
+  @override
+  @JsonKey()
+  List<String> get topics {
+    if (_topics is EqualUnmodifiableListView) return _topics;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_topics);
+  }
+
   @override
   final int? logIndex;
   @override
@@ -214,7 +238,7 @@ class _$LogImpl extends _Log {
 
   @override
   String toString() {
-    return 'Log(address: $address, blockHash: $blockHash, blockNumber: $blockNumber, data: $data, logIndex: $logIndex, transactionHash: $transactionHash, transactionIndex: $transactionIndex, removed: $removed)';
+    return 'Log(address: $address, blockHash: $blockHash, blockNumber: $blockNumber, data: $data, topics: $topics, logIndex: $logIndex, transactionHash: $transactionHash, transactionIndex: $transactionIndex, removed: $removed)';
   }
 
   @override
@@ -228,6 +252,7 @@ class _$LogImpl extends _Log {
             (identical(other.blockNumber, blockNumber) ||
                 other.blockNumber == blockNumber) &&
             (identical(other.data, data) || other.data == data) &&
+            const DeepCollectionEquality().equals(other._topics, _topics) &&
             (identical(other.logIndex, logIndex) ||
                 other.logIndex == logIndex) &&
             (identical(other.transactionHash, transactionHash) ||
@@ -238,8 +263,17 @@ class _$LogImpl extends _Log {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, address, blockHash, blockNumber,
-      data, logIndex, transactionHash, transactionIndex, removed);
+  int get hashCode => Object.hash(
+      runtimeType,
+      address,
+      blockHash,
+      blockNumber,
+      data,
+      const DeepCollectionEquality().hash(_topics),
+      logIndex,
+      transactionHash,
+      transactionIndex,
+      removed);
 
   /// Create a copy of Log
   /// with the given fields replaced by the non-null parameter values.
@@ -256,6 +290,7 @@ abstract class _Log extends Log {
       final String? blockHash,
       final BigInt? blockNumber,
       required final String data,
+      final List<String> topics,
       final int? logIndex,
       final String? transactionHash,
       final int? transactionIndex,
@@ -270,6 +305,8 @@ abstract class _Log extends Log {
   BigInt? get blockNumber;
   @override
   String get data;
+  @override
+  List<String> get topics;
   @override
   int? get logIndex;
   @override

@@ -14,13 +14,14 @@ extension type JSLog(JSObject _) implements JSObject {
   external JSAny? get abi;
   external JSString? get eventName;
   external JSAny get args;
-  external JSAny get topics;
+  external JSArray<JSString>? get topics;
 
   Log get toDart => Log(
         address: address.toDart,
         blockHash: blockHash?.toDart,
         blockNumber: blockNumber?.toDart,
         data: data.toDart,
+        topics: topics?.toDart.map((topic) => topic.toDart).toList() ?? const [],
         logIndex: logIndex?.toDartInt,
         transactionHash: transactionHash?.toDart,
         transactionIndex: transactionIndex?.toDartInt,
